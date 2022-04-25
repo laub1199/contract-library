@@ -1,4 +1,4 @@
 .idea
 hardhat/artifacts
-hardhat/acache
+hardhat/cache
 hardhat/node_modules
