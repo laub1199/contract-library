@@ -25,7 +25,7 @@ describe('Payable.sol', () => {
     feeReceiver1 = ethers.Wallet.createRandom()
     feeReceiver2 = ethers.Wallet.createRandom()
 
-    this.erc20Factory = await ethers.getContractFactory('TestERC20')
+    this.erc20Factory = await ethers.getContractFactory('TERC20')
     this.erc20 = await this.erc20Factory.deploy()
 
     this.payableFactory = await ethers.getContractFactory('Payable')
