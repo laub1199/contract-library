@@ -9,6 +9,8 @@ const {
 } = require('hardhat')
 const { address } = require("hardhat/internal/core/config/config-validation")
 
+const { deployContract, mineUntil, increaseTime } = require('./helper')
+
 chai.use(chaiAsPromised)
 const expect = chai.expect
 const DELTA = 0.001
@@ -25,15 +27,12 @@ describe('Payable.sol', () => {
     feeReceiver1 = ethers.Wallet.createRandom()
     feeReceiver2 = ethers.Wallet.createRandom()
 
-    this.erc20Factory = await ethers.getContractFactory('TERC20')
-    this.erc20 = await this.erc20Factory.deploy()
-
-    this.payableFactory = await ethers.getContractFactory('Payable')
+    this.erc20 = await deployContract('TERC20', [])
   })
 
   describe('Deployment', async () => {
     it('Simple deploy', async () => {
-      this.payable = await this.payableFactory.connect(deployer).deploy(feeReceiver1.address)
+      this.payable = await deployContract('Payable', [feeReceiver1.address])
 
       expect(await this.payable.feeReceiver()).to.be.equal(feeReceiver1.address)
       expect(await this.payable.isErc20()).to.be.false
@@ -42,7 +41,7 @@ describe('Payable.sol', () => {
 
   describe('Update functions', async () => {
     beforeEach(async () => {
-      this.payable = await this.payableFactory.connect(deployer).deploy(feeReceiver1.address)
+      this.payable = await deployContract('Payable', [feeReceiver1.address])
     })
 
     it('Payable: setFeeReceiver', async () => {
@@ -73,7 +72,7 @@ describe('Payable.sol', () => {
 
   describe('Action functions', async () => {
     beforeEach(async () => {
-      this.payable = await this.payableFactory.connect(deployer).deploy(feeReceiver1.address)
+      this.payable = await deployContract('Payable', [feeReceiver1.address])
 
       await this.erc20.connect(deployer).transfer(payer1.address, parseEther('100'))
       expect(await this.erc20.balanceOf(payer1.address)).to.be.equal(parseEther('100'))
