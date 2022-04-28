@@ -5,7 +5,7 @@ const deployContract = async (contractName, constructorArgs) => {
   try {
     factory = await ethers.getContractFactory(contractName);
   } catch (e) {
-    factory = await ethers.getContractFactory(contractName + 'UpgradeableWithInit');
+    console.log(e)
   }
   let contract = await factory.deploy(...(constructorArgs || []));
   await contract.deployed();

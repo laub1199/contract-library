@@ -27,7 +27,7 @@ describe('Payable.sol', () => {
     feeReceiver1 = ethers.Wallet.createRandom()
     feeReceiver2 = ethers.Wallet.createRandom()
 
-    this.erc20 = await deployContract('TERC20', [])
+    this.erc20 = await deployContract('ERC20Mock', [])
   })
 
   describe('Deployment', async () => {

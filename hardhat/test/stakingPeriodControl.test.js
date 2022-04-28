@@ -33,7 +33,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -51,7 +51,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -69,7 +69,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -94,7 +94,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -120,7 +120,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -152,7 +152,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -184,7 +184,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -223,7 +223,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -265,7 +265,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -289,7 +289,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -313,7 +313,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -343,7 +343,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -373,7 +373,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -409,7 +409,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -447,7 +447,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -472,7 +472,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 1000
       const bonusEnd = end + 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         false,
         start,
         end,
@@ -496,7 +496,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -526,7 +526,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -550,7 +550,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
@@ -574,7 +574,7 @@ describe('StakingPeriodControl.sol', () => {
       const end = start + 30 * 60 * 1000
       const bonusEnd = end + 5 * 60 * 60 * 1000
 
-      const spc = await deployContract('TStakingPeriodControl', [
+      const spc = await deployContract('StakingPeriodControlMock', [
         true,
         start,
         end,
