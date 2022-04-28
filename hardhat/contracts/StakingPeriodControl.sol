@@ -69,8 +69,8 @@ contract StakingPeriodControl is Ownable {
             require((isTimestamp ? block.timestamp : block.number) < start, "StakingPeriodControl: staking period has started");
         }
         require((_isTimestamp ? block.timestamp : block.number) <= _start, "StakingPeriodControl: new start must be larger than or equal to current block");
-        require(_start <= _end, "StakingPeriodControl: new end must be larger than new start");
-        require(_end < _bonusEnd, "StakingPeriodControl: new bonusEnd must be larger than new end");
+        require(_start < _end, "StakingPeriodControl: new end must be larger than new start");
+        require(_end <= _bonusEnd, "StakingPeriodControl: new bonusEnd must be larger than new end");
     }
 
     function _updateStakingPeriod(bool _isTimestamp, uint256 _start, uint256 _end, uint256 _bonusEnd) private {
