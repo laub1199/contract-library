@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "chai-as-promised": "^7.1.1",
-    "hardhat-gas-reporter": "^1.0.6"
+    "hardhat-gas-reporter": "^1.0.6",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.31"
   }
 }
