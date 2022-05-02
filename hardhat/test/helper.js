@@ -23,4 +23,8 @@ const increaseTime = async (time) => {
   await ethers.provider.send('evm_mine')
 }
 
-module.exports = { deployContract, mineUntil, increaseTime };
+const getBlockTime = async () => {
+  return (await ethers.provider.getBlock(await ethers.provider.getBlockNumber())).timestamp
+}
+
+module.exports = { deployContract, mineUntil, increaseTime, getBlockTime };
