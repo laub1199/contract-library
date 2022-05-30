@@ -3,16 +3,16 @@ const chaiAsPromised = require('chai-as-promised')
 const {
   deployments,
   ethers: {
-    utils: {parseEther, formatEther},
+    utils: { parseEther, formatEther },
   },
   ethers,
 } = require('hardhat')
-const { address } = require("hardhat/internal/core/config/config-validation")
+const { address } = require('hardhat/internal/core/config/config-validation')
 
 const { deployContract, mineUntil, increaseTime } = require('./helper')
 
 chai.use(chaiAsPromised)
-const expect = chai.expect
+const { expect } = chai
 const DELTA = 0.001
 
 describe('Payable.sol', () => {
@@ -63,7 +63,7 @@ describe('Payable.sol', () => {
     it('Payable: setIsErc20', async () => {
       expect(await this.payable.isErc20()).to.be.false
 
-      await this.payable.setIsErc20(true, this.erc20.address)
+      await this.payable.setIsErc20(this.erc20.address)
 
       expect(await this.payable.isErc20()).to.be.true
       expect(await this.payable.receiveToken()).to.be.equal(this.erc20.address)
@@ -81,14 +81,14 @@ describe('Payable.sol', () => {
     it('Simple pay with BNB', async () => {
       const beforePay = parseFloat(formatEther(await ethers.provider.getBalance(payer1.address)))
 
-      await this.payable.connect(payer1).pay(parseEther('5'), {value: parseEther('5')})
+      await this.payable.connect(payer1).pay(parseEther('5'), { value: parseEther('5') })
 
       expect(beforePay - parseFloat(formatEther(await ethers.provider.getBalance(payer1.address)))).to.be.closeTo(5, DELTA)
       expect(parseFloat(formatEther(await ethers.provider.getBalance(feeReceiver1.address)))).to.be.closeTo(5, DELTA)
     })
 
     it('Simple pay with ERC20', async () => {
-      await this.payable.setIsErc20(true, this.erc20.address)
+      await this.payable.setIsErc20(this.erc20.address)
 
       await this.erc20.connect(payer1).approve(this.payable.address, parseEther('5'))
 
@@ -101,7 +101,7 @@ describe('Payable.sol', () => {
     it('Revert pay due to Payable: insufficient amount', async () => {
       const beforePay = parseFloat(formatEther(await ethers.provider.getBalance(payer1.address)))
 
-      await expect(this.payable.connect(payer1).pay(parseEther('5'), {value: parseEther('4')})).to.be.revertedWith('Payable: insufficient amount')
+      await expect(this.payable.connect(payer1).pay(parseEther('5'), { value: parseEther('4') })).to.be.revertedWith('Payable: insufficient amount')
 
       expect(beforePay - parseFloat(formatEther(await ethers.provider.getBalance(payer1.address)))).to.be.closeTo(0, DELTA)
       expect(parseFloat(formatEther(await ethers.provider.getBalance(feeReceiver1.address)))).to.be.closeTo(0, DELTA)
