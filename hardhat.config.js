@@ -1,19 +1,21 @@
-require("@nomiclabs/hardhat-etherscan");
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-ethers");
-require("./tasks");
-require("hardhat-gas-reporter");
-require("hardhat-deploy");
+require('@nomiclabs/hardhat-ethers')
+require('@nomiclabs/hardhat-etherscan')
+require('@nomiclabs/hardhat-waffle')
+
+require('hardhat-deploy')
+require('hardhat-gas-reporter')
+
+require('./tasks')
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
+task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
+  const accounts = await hre.ethers.getSigners()
 
   for (const account of accounts) {
-    console.log(account.address);
+    console.log(account.address)
   }
-});
+})
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -22,29 +24,39 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  defaultNetwork: 'rinkeby',
+  solidity: {
+    compilers: [
+      {
+        version: '0.8.4',
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200
+          }
+        }
+      },
+    ],
+
+
+  },
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545",
+      url: 'http://127.0.0.1:8545',
     },
     hardhat: {
       chainId: 1337
     },
-    devnet: {
-      url: "http://ec2-35-88-7-74.us-west-2.compute.amazonaws.com",
-      chainId: 1024,
-      gasPrice: 14000000000
-    },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/ed08a8c8e8cc42ce869a2ca650ddf3f3",
+      url: 'https://rinkeby.infura.io/v3/ed08a8c8e8cc42ce869a2ca650ddf3f3',
       chainId: 4,
       // accounts: ['']
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/ed08a8c8e8cc42ce869a2ca650ddf3f3",
+      url: 'https://mainnet.infura.io/v3/ed08a8c8e8cc42ce869a2ca650ddf3f3',
       chainId: 1,
       // accounts: [''],
-      gasPrice: 50000000000
+      // gasPrice: 50000000000
     }
   },
   gasReporter: {
@@ -54,8 +66,5 @@ module.exports = {
     // gasPrice: 70,
     currency: 'ETH',
     coinmarketcap: 'e2d737ae-c334-4a87-9ff4-24eeb1087b76'
-  },
-  mocha: {
-    timeout: 70000
   }
-};
+}
