@@ -241,12 +241,17 @@ pip3 install slither-analyzer
 
 ## After writing contracts and related test cases
 
+### Reformat contracts with prettier
+```shell
+yarn run prettier
+```
+
 ### Run coverage test with `solidity-coverage`
 
 ```shell
 npx hardhat coverage
 
-# with harthat-shorthand installed
+# with hardhat-shorthand installed
 hh coverage
 ```
 
