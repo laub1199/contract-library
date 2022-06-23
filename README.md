@@ -241,6 +241,15 @@ pip3 install slither-analyzer
 
 ## After writing contracts and related test cases
 
+### Run coverage test with `solidity-coverage`
+
+```shell
+npx hardhat coverage
+
+# with harthat-shorthand installed
+hh coverage
+```
+
 ### Run static analysis with `slither`
 ```shell
 yarn run slither

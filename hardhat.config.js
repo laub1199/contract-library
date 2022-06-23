@@ -4,6 +4,7 @@ require('@nomiclabs/hardhat-waffle')
 
 require('hardhat-deploy')
 require('hardhat-gas-reporter')
+require('solidity-coverage')
 
 require('./tasks')
 
