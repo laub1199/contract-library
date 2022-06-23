@@ -221,3 +221,28 @@ const proof = tree.getProof(leaf)
 await contract.fn(proof)
 ```
 
+## Additional package for static analysis
+
+### [crytic/slither](https://github.com/crytic/slither)
+
+#### Prerequisites
+1. python3 & pip3
+2. solc-select
+
+To install solc-select
+```shell
+pip3 install solc-select
+```
+
+To install slither
+```shell
+pip3 install slither-analyzer
+```
+
+## After writing contracts and related test cases
+
+### Run static analysis with `slither`
+```shell
+yarn run slither
+```
+
