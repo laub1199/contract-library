@@ -5,35 +5,30 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Whitelist is Ownable {
-  bytes32[] public merkleTrees;
+    bytes32 public tree;
 
-  modifier onlyWhitelisted (bytes32[] memory proof) {
-    bool isWhitelisted = false;
-    for (uint256 i = 0; i < merkleTrees.length; i++) {
-      if (MerkleProof.verify(proof, merkleTrees[i], keccak256(abi.encodePacked(msg.sender)))) {
-        isWhitelisted = true;
-        break;
-      }
+    modifier onlyWhitelisted(bytes32[] memory _proof) {
+        require(
+            isWhitelisted(msg.sender, _proof),
+            "Whitelist: whitelist is required"
+        );
+        _;
     }
-    require(isWhitelisted, 'Whitelist: whitelist is required');
-    _;
-  }
 
-  function addTree(bytes32 root) external onlyOwner {
-    merkleTrees.push(root);
-  }
-
-  function removeTree(bytes32 root) external onlyOwner {
-    for (uint256 i = 0; i < merkleTrees.length; i++) {
-      if (merkleTrees[i] == root) {
-        merkleTrees[i] = merkleTrees[merkleTrees.length - 1];
-        merkleTrees.pop();
-        break;
-      }
+    function isWhitelisted(address _address, bytes32[] memory _proof)
+        public
+        view
+        returns (bool)
+    {
+        return
+            MerkleProof.verify(
+                _proof,
+                tree,
+                keccak256(abi.encodePacked(_address))
+            );
     }
-  }
 
-  function getTreeCount() external view returns (uint256) {
-    return merkleTrees.length;
-  }
+    function updateTree(bytes32 _root) external onlyOwner {
+        tree = _root;
+    }
 }
