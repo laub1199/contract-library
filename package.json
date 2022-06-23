@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "slither": "slither ./contracts --solc-remaps '@openzeppelin=node_modules/@openzeppelin @chainlink=node_modules/@chainlink' --exclude naming-convention,external-function,low-level-calls --buidler-ignore-compile"
+    "slither": "slither ./contracts --solc-remaps '@openzeppelin=node_modules/@openzeppelin @chainlink=node_modules/@chainlink' --exclude naming-convention,external-function,low-level-calls --buidler-ignore-compile",
+    "prettier": "prettier --write 'contracts/**/*.sol'"
   },
   "author": "Sennett Lau | Pawbit",
   "license": "ISC",
@@ -27,6 +28,8 @@
     "hardhat-gas-reporter": "^1.0.6",
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.2.31",
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
     "solidity-coverage": "^0.7.21"
   }
 }

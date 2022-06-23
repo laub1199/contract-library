@@ -15,7 +15,7 @@ contract VRFRandomNumberGenerator is VRFConsumerBaseV2 {
 
   uint16 requestConfirmations = 3;
 
-  mapping (uint256=>Storage) randomNumberStorage;
+  mapping(uint256 => Storage) randomNumberStorage;
 
   uint256 public queueIndex;
   uint256 public queueCounter;
@@ -36,8 +36,16 @@ contract VRFRandomNumberGenerator is VRFConsumerBaseV2 {
 
   event GeneratedRandomNumber(uint256 number);
 
-  constructor(uint64 _subscriptionId, uint32 _queueLength, address _vrfCoordinator, bytes32 _keyHash) VRFConsumerBaseV2(_vrfCoordinator) {
-    require(_queueLength <= 100, 'VRFRandomNumberGenerator: queue length exceed limit');
+  constructor(
+    uint64 _subscriptionId,
+    uint32 _queueLength,
+    address _vrfCoordinator,
+    bytes32 _keyHash
+  ) VRFConsumerBaseV2(_vrfCoordinator) {
+    require(
+      _queueLength <= 100,
+      "VRFRandomNumberGenerator: queue length exceed limit"
+    );
 
     s_owner = msg.sender;
     s_subscriptionId = _subscriptionId;
@@ -67,48 +75,82 @@ contract VRFRandomNumberGenerator is VRFConsumerBaseV2 {
     );
   }
 
-  function fulfillRandomWords(
-    uint256,
-    uint256[] memory randomWords
-  ) internal override {
-    uint256 index = queueIndex == 0 && randomNumberStorage[0].queue.length > 0 ? 1 : 0;
-    if (randomNumberStorage[0].queue.length > 0 && randomNumberStorage[1].queue.length > 0) {
-      index = queueBlob == randomNumberStorage[queueIndex].queue[queueCounter] && queueCounter == 0 ? queueIndex : index;
+  function fulfillRandomWords(uint256, uint256[] memory randomWords)
+  internal
+  override
+  {
+    uint256 index = queueIndex == 0 &&
+    randomNumberStorage[0].queue.length > 0
+    ? 1
+    : 0;
+    if (
+      randomNumberStorage[0].queue.length > 0 &&
+      randomNumberStorage[1].queue.length > 0
+    ) {
+      index = queueBlob ==
+      randomNumberStorage[queueIndex].queue[queueCounter] &&
+      queueCounter == 0
+      ? queueIndex
+      : index;
     }
     randomNumberStorage[index].queue = randomWords;
   }
 
-  function getRandomNumber(uint256 _range) external returns(uint256) {
-    if ((randomNumberStorage[0].queue.length == 0 && randomNumberStorage[1].queue.length == 0) || (queueCounter == 0 && randomNumberStorage[queueIndex].queue[queueCounter] == queueBlob && randomNumberStorage[1].queue.length > 0)) {
+  function getRandomNumber(uint256 _range) external returns (uint256) {
+    if (
+      (randomNumberStorage[0].queue.length == 0 &&
+      randomNumberStorage[1].queue.length == 0) ||
+      (queueCounter == 0 &&
+      randomNumberStorage[queueIndex].queue[queueCounter] ==
+      queueBlob &&
+      randomNumberStorage[1].queue.length > 0)
+    ) {
       counter++;
       uint256 rand = _fallbackRandom() % _range;
 
       emit GeneratedRandomNumber(rand % _range);
       return rand;
     } else {
-      uint256 rand = randomNumberStorage[queueIndex].queue[queueCounter] % _range;
+      uint256 rand = randomNumberStorage[queueIndex].queue[queueCounter] %
+      _range;
       uint256 oldQueueCounter = queueCounter;
 
-      randomNumberStorage[queueIndex].queue[queueCounter] = randomNumberStorage[queueIndex].queue[queueCounter] / _range;
+      randomNumberStorage[queueIndex].queue[queueCounter] =
+      randomNumberStorage[queueIndex].queue[queueCounter] /
+      _range;
 
-      if(randomNumberStorage[queueIndex].queue[queueCounter] == 0) {
-        queueCounter = queueCounter == queueLength - 1 ? 0 : queueCounter + 1;
+      if (randomNumberStorage[queueIndex].queue[queueCounter] == 0) {
+        queueCounter = queueCounter == queueLength - 1
+        ? 0
+        : queueCounter + 1;
       }
 
-      if (oldQueueCounter != queueCounter && queueCounter == queueLength / 2) {
-        queueBlob = randomNumberStorage[1 - queueIndex].queue.length > 0 ? randomNumberStorage[1 - queueIndex].queue[0] : 0;
+      if (
+        oldQueueCounter != queueCounter &&
+        queueCounter == queueLength / 2
+      ) {
+        queueBlob = randomNumberStorage[1 - queueIndex].queue.length > 0
+        ? randomNumberStorage[1 - queueIndex].queue[0]
+        : 0;
         _requestRandomWords();
       }
 
-      queueIndex = queueCounter == 0 && oldQueueCounter != queueCounter ? 1 - queueIndex : queueIndex;
+      queueIndex = queueCounter == 0 && oldQueueCounter != queueCounter
+      ? 1 - queueIndex
+      : queueIndex;
 
       emit GeneratedRandomNumber(rand);
       return rand;
     }
   }
 
-  function _fallbackRandom() internal virtual view returns(uint256) {
-    return uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, counter)));
+  function _fallbackRandom() internal view virtual returns (uint256) {
+    return
+    uint256(
+      keccak256(
+        abi.encodePacked(block.difficulty, block.timestamp, counter)
+      )
+    );
   }
 
   modifier onlyOwner() {

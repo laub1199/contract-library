@@ -34,11 +34,11 @@ contract VRFRandomNumberGeneratorMock is VRFRandomNumberGenerator {
     randomNumberStorage[index].queue = randomWords;
   }
 
-  function getQueue(uint256 _queueIndex) public view returns(uint256[] memory) {
+  function getQueue(uint256 _queueIndex) public view returns (uint256[] memory) {
     return randomNumberStorage[_queueIndex].queue;
   }
 
-  function _fallbackRandom() internal override pure returns(uint256) {
+  function _fallbackRandom() internal override pure returns (uint256) {
     return 9;
   }
 }
