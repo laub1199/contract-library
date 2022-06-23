@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "../VRFRandomNumberGenerator.sol";
@@ -39,7 +38,7 @@ contract VRFRandomNumberGeneratorMock is VRFRandomNumberGenerator {
     return randomNumberStorage[_queueIndex].queue;
   }
 
-  function _fallbackRandom() internal override view returns(uint256) {
+  function _fallbackRandom() internal override pure returns(uint256) {
     return 9;
   }
 }
